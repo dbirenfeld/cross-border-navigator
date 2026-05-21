@@ -2,6 +2,7 @@
 
 import { CalculationResult } from "@/types";
 import { formatCurrency } from "@/lib/utils";
+import { convertToLocal } from "@/lib/data/currencies";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -143,6 +144,33 @@ export function CostBreakdown({ result }: CostBreakdownProps) {
             label="Documentation & Processing"
             amount={breakdown.documentation}
           />
+
+          {breakdown.hiddenFees && breakdown.hiddenFees.total > 0 && (
+            <>
+              <Separator className="my-2" />
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium">Additional Fees</span>
+                  <Badge variant="secondary" className="ml-auto">
+                    {formatCurrency(breakdown.hiddenFees.total)}
+                  </Badge>
+                </div>
+                <div className="flex justify-between items-center text-sm pl-6 text-muted-foreground">
+                  <span>Port Storage (~4 days)</span>
+                  <span>{formatCurrency(breakdown.hiddenFees.portStorage)}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm pl-6 text-muted-foreground">
+                  <span>Customs X-Ray Inspection</span>
+                  <span>{formatCurrency(breakdown.hiddenFees.customsXray)}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm pl-6 text-muted-foreground">
+                  <span>Broker Disbursement</span>
+                  <span>{formatCurrency(breakdown.hiddenFees.brokerDisbursement)}</span>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <Separator className="my-4" />
@@ -151,6 +179,12 @@ export function CostBreakdown({ result }: CostBreakdownProps) {
           <span>Total Landed Cost</span>
           <span className="text-primary">{formatCurrency(totalLandedCost)}</span>
         </div>
+        {result.input.destinationCountry && (
+          <div className="flex justify-between items-center text-sm text-muted-foreground mt-1">
+            <span>In local currency</span>
+            <span>{convertToLocal(totalLandedCost, result.input.destinationCountry).formatted}</span>
+          </div>
+        )}
       </Card>
 
       <Card className="p-4 border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30">

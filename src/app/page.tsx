@@ -83,22 +83,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Section */}
+      {/* Platform Modules */}
       <section className="py-20">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold">One Platform, Every Step</h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
+              From feasibility check to post-arrival compliance — we cover the entire import journey.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <ModuleCard href="/feasibility" title="Feasibility" description="VIN decode, compliance scan, legality check" />
+            <ModuleCard href="/calculate" title="Cost Calculator" description="Duties, shipping, taxes, hidden fees" />
+            <ModuleCard href="/paperwork" title="Paperwork" description="Declaration generator, document vault" />
+            <ModuleCard href="/tracker" title="Transit Tracker" description="Pipeline board from purchase to delivery" />
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-3xl font-bold text-primary">6</div>
-                <p className="text-muted-foreground mt-1">GCC Countries Supported</p>
+                <div className="text-3xl font-bold text-primary">7</div>
+                <p className="text-muted-foreground mt-1 text-sm">Countries</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">24+</div>
-                <p className="text-muted-foreground mt-1">Shipping Routes Mapped</p>
+                <div className="text-3xl font-bold text-primary">30+</div>
+                <p className="text-muted-foreground mt-1 text-sm">Shipping Routes</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">100%</div>
-                <p className="text-muted-foreground mt-1">Free to Use</p>
+                <div className="text-3xl font-bold text-primary">40+</div>
+                <p className="text-muted-foreground mt-1 text-sm">Car Brands</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary">Free</div>
+                <p className="text-muted-foreground mt-1 text-sm">No Sign-up</p>
               </div>
             </div>
           </div>
@@ -157,5 +179,16 @@ function FeatureCard({
       <h3 className="font-semibold text-lg">{title}</h3>
       <p className="text-sm text-muted-foreground mt-2">{description}</p>
     </Card>
+  );
+}
+
+function ModuleCard({ href, title, description }: { href: string; title: string; description: string }) {
+  return (
+    <Link href={href}>
+      <Card className="p-5 h-full hover:shadow-md hover:border-primary/50 transition-all cursor-pointer">
+        <h3 className="font-semibold">{title}</h3>
+        <p className="text-sm text-muted-foreground mt-1">{description}</p>
+      </Card>
+    </Link>
   );
 }

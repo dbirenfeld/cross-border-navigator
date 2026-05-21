@@ -76,6 +76,13 @@ export interface CostLineItem {
   isSubItem?: boolean;
 }
 
+export interface HiddenFees {
+  portStorage: number;
+  customsXray: number;
+  brokerDisbursement: number;
+  total: number;
+}
+
 export interface CalculationResult {
   input: CalculationInput;
   breakdown: {
@@ -88,6 +95,7 @@ export interface CalculationResult {
     portHandling: number;
     modifications: CostLineItem[];
     documentation: number;
+    hiddenFees: HiddenFees;
   };
   totalLandedCost: number;
   cifValue: number;

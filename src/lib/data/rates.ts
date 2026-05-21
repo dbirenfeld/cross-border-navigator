@@ -93,3 +93,15 @@ export const shippingRoutes: ShippingRoute[] = [
 export const INSURANCE_RATE = 0.015; // 1.5% of CIF
 export const PORT_HANDLING_FEE = 350;
 export const DOCUMENTATION_FEE = 250;
+
+export const HIDDEN_FEES = {
+  portStoragePerDay: 75,
+  estimatedStorageDays: 4,
+  customsXrayFee: 150,
+  brokerDisbursement: 200,
+};
+
+export const TOTAL_HIDDEN_FEES =
+  HIDDEN_FEES.portStoragePerDay * HIDDEN_FEES.estimatedStorageDays +
+  HIDDEN_FEES.customsXrayFee +
+  HIDDEN_FEES.brokerDisbursement;

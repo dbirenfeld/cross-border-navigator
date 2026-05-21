@@ -3,7 +3,7 @@ import { calculateCIF, calculateCustomsDuty, calculatePurchaseTax, calculateVAT 
 import { estimateShipping } from "./shipping";
 import { estimateModificationCost } from "./modifications";
 import { getCoastForRegion } from "@/lib/data/countries";
-import { PORT_HANDLING_FEE, DOCUMENTATION_FEE } from "@/lib/data/rates";
+import { PORT_HANDLING_FEE, DOCUMENTATION_FEE, HIDDEN_FEES } from "@/lib/data/rates";
 
 export function calculateLandedCost(input: CalculationInput): CalculationResult {
   const coast = getCoastForRegion(input.originCountry, input.originRegion);
@@ -37,6 +37,16 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
     isSubItem: true,
   }));
 
+  const hiddenFees = {
+    portStorage: HIDDEN_FEES.portStoragePerDay * HIDDEN_FEES.estimatedStorageDays,
+    customsXray: HIDDEN_FEES.customsXrayFee,
+    brokerDisbursement: HIDDEN_FEES.brokerDisbursement,
+    total:
+      HIDDEN_FEES.portStoragePerDay * HIDDEN_FEES.estimatedStorageDays +
+      HIDDEN_FEES.customsXrayFee +
+      HIDDEN_FEES.brokerDisbursement,
+  };
+
   const totalLandedCost =
     input.itemValue +
     shipping.cost +
@@ -46,7 +56,8 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
     vat +
     PORT_HANDLING_FEE +
     modifications.total +
-    DOCUMENTATION_FEE;
+    DOCUMENTATION_FEE +
+    hiddenFees.total;
 
   return {
     input,
@@ -60,6 +71,7 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
       portHandling: PORT_HANDLING_FEE,
       modifications: modificationLineItems,
       documentation: DOCUMENTATION_FEE,
+      hiddenFees,
     },
     totalLandedCost,
     cifValue: cif,

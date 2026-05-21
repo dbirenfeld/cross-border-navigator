@@ -258,6 +258,14 @@ export function PdfReport({ result }: PdfReportProps) {
             <Text style={styles.rowLabel}>Documentation & Processing</Text>
             <Text style={styles.rowValue}>{formatCurrency(breakdown.documentation)}</Text>
           </View>
+          {breakdown.hiddenFees && breakdown.hiddenFees.total > 0 && (
+            <>
+              <View style={styles.row}>
+                <Text style={styles.rowLabel}>Additional Fees (storage, x-ray, broker)</Text>
+                <Text style={styles.rowValue}>{formatCurrency(breakdown.hiddenFees.total)}</Text>
+              </View>
+            </>
+          )}
 
           <View style={styles.totalRow}>
             <Text style={styles.totalLabel}>TOTAL ESTIMATED LANDED COST</Text>
