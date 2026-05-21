@@ -1,12 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { CalculationResult } from "@/types";
 import { CostBreakdown } from "@/components/CostBreakdown";
 import { HomologationWarnings } from "@/components/calculator/HomologationWarnings";
+import { DocumentPackageGenerator } from "@/components/calculator/DocumentPackageGenerator";
 import { LeadCapture } from "@/components/calculator/LeadCapture";
 import { DownloadPdfButton } from "@/components/calculator/DownloadPdfButton";
 import { Button } from "@/components/ui/button";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, FileText } from "lucide-react";
 
 interface ResultsStepProps {
   result: CalculationResult | null;
@@ -15,6 +17,7 @@ interface ResultsStepProps {
 }
 
 export function ResultsStep({ result, isLoading, onReset }: ResultsStepProps) {
+  const [showDocGen, setShowDocGen] = useState(false);
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
@@ -48,6 +51,10 @@ export function ResultsStep({ result, isLoading, onReset }: ResultsStepProps) {
 
       <div className="flex flex-col sm:flex-row justify-center gap-3">
         <DownloadPdfButton result={result} />
+        <Button onClick={() => setShowDocGen(true)} variant="outline">
+          <FileText className="h-4 w-4 mr-2" />
+          Generate Paperwork
+        </Button>
         <Button onClick={onReset} variant="outline">
           <RotateCcw className="h-4 w-4 mr-2" />
           Calculate Another
@@ -55,6 +62,10 @@ export function ResultsStep({ result, isLoading, onReset }: ResultsStepProps) {
       </div>
 
       <LeadCapture />
+
+      {showDocGen && (
+        <DocumentPackageGenerator result={result} onClose={() => setShowDocGen(false)} />
+      )}
     </div>
   );
 }
