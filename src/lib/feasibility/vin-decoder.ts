@@ -51,6 +51,20 @@ export function isValidVin(vin: string): boolean {
   return /^[A-Z0-9]{17}$/i.test(vin);
 }
 
+/**
+ * Auto-corrects commonly misread VIN characters:
+ * O -> 0 (letter O confused with zero)
+ * I -> 1 (letter I confused with one)
+ * Q -> 0 (letter Q confused with zero, rare)
+ */
+export function sanitizeVin(vin: string): string {
+  return vin
+    .toUpperCase()
+    .replace(/O/g, "0")
+    .replace(/I/g, "1")
+    .replace(/Q/g, "0");
+}
+
 export async function decodeVin(vin: string): Promise<VinDecodedResult> {
   const response = await fetch(`/api/vin?vin=${encodeURIComponent(vin)}`);
   if (!response.ok) throw new Error("VIN decode failed");
