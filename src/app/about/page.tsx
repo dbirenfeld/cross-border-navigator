@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { platformStats } from "@/lib/data/stats";
 import Link from "next/link";
 import {
   Calculator,
@@ -94,21 +95,19 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold mb-8">Supported Corridors</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Card className="p-6">
-                <h3 className="font-semibold mb-3">Origins</h3>
+                <h3 className="font-semibold mb-3">Origins ({platformStats.originCountries})</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>United States (all 50 states)</li>
-                  <li>Canada (all provinces & territories)</li>
+                  {platformStats.originCountryNames.map((name) => (
+                    <li key={name}>{name}</li>
+                  ))}
                 </ul>
               </Card>
               <Card className="p-6">
-                <h3 className="font-semibold mb-3">Destinations</h3>
+                <h3 className="font-semibold mb-3">Destinations ({platformStats.destinationCountries})</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>United Arab Emirates</li>
-                  <li>Saudi Arabia</li>
-                  <li>Kuwait</li>
-                  <li>Qatar</li>
-                  <li>Bahrain</li>
-                  <li>Oman</li>
+                  {platformStats.destinationCountryNames.map((name) => (
+                    <li key={name}>{name}</li>
+                  ))}
                 </ul>
               </Card>
             </div>

@@ -41,7 +41,7 @@ export function VinInput({ onDecode, isLoading }: VinInputProps) {
             }}
             placeholder="e.g. 1HGCG5655WA006001"
             maxLength={17}
-            className="font-mono text-lg tracking-wider"
+            className="font-mono text-sm sm:text-lg tracking-wide sm:tracking-wider"
           />
           <Button type="submit" disabled={isLoading || vin.length !== 17}>
             {isLoading ? (

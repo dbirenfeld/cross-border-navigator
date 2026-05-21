@@ -42,18 +42,18 @@ export default function TrackerPage() {
     <div className="min-h-screen bg-muted/30">
       <Header />
       <main className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-2">
               <Ship className="h-4 w-4" />
               Transit Tracker
             </div>
-            <h1 className="text-3xl font-bold">Shipment Pipeline</h1>
-            <p className="text-muted-foreground mt-1">
+            <h1 className="text-2xl sm:text-3xl font-bold">Shipment Pipeline</h1>
+            <p className="text-muted-foreground mt-1 text-sm sm:text-base">
               Track your imports from purchase to delivery
             </p>
           </div>
-          <Button onClick={() => setShowModal(true)}>
+          <Button onClick={() => setShowModal(true)} className="w-full sm:w-auto">
             <Plus className="h-4 w-4 mr-2" />
             Add Shipment
           </Button>

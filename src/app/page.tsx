@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { platformStats } from "@/lib/data/stats";
 import {
   Calculator,
   Globe,
@@ -107,15 +108,15 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-3xl font-bold text-primary">7</div>
+                <div className="text-3xl font-bold text-primary">{platformStats.totalCountries}</div>
                 <p className="text-muted-foreground mt-1 text-sm">Countries</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">30+</div>
+                <div className="text-3xl font-bold text-primary">{platformStats.shippingRoutes}</div>
                 <p className="text-muted-foreground mt-1 text-sm">Shipping Routes</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">40+</div>
+                <div className="text-3xl font-bold text-primary">{platformStats.vehicleBrands}</div>
                 <p className="text-muted-foreground mt-1 text-sm">Car Brands</p>
               </div>
               <div>

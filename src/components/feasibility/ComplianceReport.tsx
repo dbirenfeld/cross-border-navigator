@@ -50,9 +50,9 @@ export function ComplianceReport({ items, legalityResult }: ComplianceReportProp
 
       {/* Summary */}
       <Card className="p-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <h3 className="font-semibold">Compliance Summary</h3>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <Badge variant="secondary" className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
               {passCount} Pass
             </Badge>

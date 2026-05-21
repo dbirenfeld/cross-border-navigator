@@ -43,7 +43,7 @@ export default function MarketplacePage() {
 
         {/* Technician Directory */}
         <section className="mb-12">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <Wrench className="h-5 w-5" />
               Technician Directory
@@ -52,7 +52,7 @@ export default function MarketplacePage() {
               value={selectedCountry}
               onValueChange={(v) => { if (v) setSelectedCountry(v as DestinationCountry | "all"); }}
             >
-              <SelectTrigger className="w-48">
+              <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="Filter by country" />
               </SelectTrigger>
               <SelectContent>

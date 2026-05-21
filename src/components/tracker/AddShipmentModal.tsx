@@ -24,8 +24,8 @@ export function AddShipmentModal({ onAdd, onClose }: AddShipmentModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <Card className="p-6 w-full max-w-md">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 p-0 sm:p-4">
+      <Card className="p-6 w-full sm:max-w-md rounded-t-xl sm:rounded-xl">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-lg">Add Shipment</h3>
           <Button variant="ghost" size="icon" onClick={onClose}>

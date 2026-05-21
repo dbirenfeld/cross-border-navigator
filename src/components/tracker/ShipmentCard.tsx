@@ -37,18 +37,18 @@ export function ShipmentCard({ shipment, onAdvance, onDelete }: ShipmentCardProp
         </Button>
       </div>
 
-      <div className="flex items-center justify-between">
-        <p className="text-xs text-muted-foreground">
-          Updated {new Date(shipment.updatedAt).toLocaleDateString()}
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-xs text-muted-foreground shrink-0">
+          {new Date(shipment.updatedAt).toLocaleDateString()}
         </p>
         {canAdvance && nextStage && (
           <Button
             size="sm"
             variant="outline"
-            className="text-xs h-7"
+            className="text-xs h-7 shrink-0"
             onClick={() => onAdvance(shipment.id)}
           >
-            Move to {nextStage.label}
+            <span className="hidden sm:inline">Move to </span>{nextStage.label}
             <ArrowRight className="h-3 w-3 ml-1" />
           </Button>
         )}

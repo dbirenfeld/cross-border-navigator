@@ -12,16 +12,16 @@ interface VehicleSpecCardProps {
 export function VehicleSpecCard({ vehicle }: VehicleSpecCardProps) {
   return (
     <Card className="p-6">
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4">
         <div>
-          <h3 className="text-xl font-bold">
+          <h3 className="text-lg sm:text-xl font-bold">
             {vehicle.year} {vehicle.make} {vehicle.model}
           </h3>
           {vehicle.trim && (
             <p className="text-muted-foreground">{vehicle.trim}</p>
           )}
         </div>
-        <Badge variant="secondary" className="font-mono">
+        <Badge variant="secondary" className="font-mono text-xs self-start">
           {vehicle.vin}
         </Badge>
       </div>

@@ -17,12 +17,12 @@ export function PipelineBoard({ shipments, onAdvance, onDelete }: PipelineBoardP
         const stageShipments = shipments.filter((s) => s.stage === stage.id);
         return (
           <div key={stage.id} className="space-y-2">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-semibold text-sm">{stage.label}</h3>
               <Badge variant="secondary" className="text-xs">
                 {stageShipments.length}
               </Badge>
-              <span className="text-xs text-muted-foreground ml-auto">
+              <span className="text-xs text-muted-foreground ml-auto hidden sm:inline">
                 {stage.description}
               </span>
             </div>
