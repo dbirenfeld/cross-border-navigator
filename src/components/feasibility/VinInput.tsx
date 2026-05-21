@@ -20,7 +20,7 @@ export function VinInput({ onDecode, isLoading }: VinInputProps) {
     e.preventDefault();
     const cleaned = vin.trim().toUpperCase();
     if (!isValidVin(cleaned)) {
-      setError("Please enter a valid 17-character VIN (letters and numbers only)");
+      setError("Invalid VIN. Must be 17 characters — letters I, O, and Q are not used in VINs.");
       return;
     }
     setError("");

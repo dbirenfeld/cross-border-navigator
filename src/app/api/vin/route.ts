@@ -4,7 +4,7 @@ import { VinDecodedResult } from "@/lib/feasibility/vin-decoder";
 export async function GET(request: NextRequest) {
   const vin = request.nextUrl.searchParams.get("vin");
 
-  if (!vin || !/^[A-Z0-9]{17}$/i.test(vin)) {
+  if (!vin || !/^[A-HJ-NPR-Z0-9]{17}$/i.test(vin)) {
     return NextResponse.json({ error: "Invalid VIN" }, { status: 400 });
   }
 

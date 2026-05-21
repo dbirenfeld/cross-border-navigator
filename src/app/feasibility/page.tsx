@@ -14,7 +14,7 @@ import {
 import { VinInput } from "@/components/feasibility/VinInput";
 import { VehicleSpecCard } from "@/components/feasibility/VehicleSpecCard";
 import { ComplianceReport } from "@/components/feasibility/ComplianceReport";
-import { VinDecodedResult, checkImportLegality, sanitizeVin } from "@/lib/feasibility/vin-decoder";
+import { VinDecodedResult, checkImportLegality } from "@/lib/feasibility/vin-decoder";
 import { runComplianceScan, ComplianceItem } from "@/lib/feasibility/compliance";
 import { destinationCountries } from "@/lib/data/countries";
 import { DestinationCountry } from "@/types";
@@ -28,14 +28,12 @@ export default function FeasibilityPage() {
   const [legality, setLegality] = useState<{ allowed: boolean; warnings: string[]; notes: string } | null>(null);
   const [error, setError] = useState("");
 
-  const handleDecode = async (rawVin: string) => {
+  const handleDecode = async (vin: string) => {
     setIsLoading(true);
     setError("");
     setVehicle(null);
     setComplianceItems([]);
     setLegality(null);
-
-    const vin = sanitizeVin(rawVin);
 
     try {
       const response = await fetch(`/api/vin?vin=${vin}`);
