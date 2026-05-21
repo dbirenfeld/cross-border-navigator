@@ -32,10 +32,10 @@ export function LeadCapture() {
 
   if (submitted) {
     return (
-      <Card className="p-6 text-center bg-green-50 border-green-200">
-        <CheckCircle2 className="h-8 w-8 text-green-600 mx-auto mb-2" />
-        <p className="font-semibold text-green-800">You&apos;re on the list!</p>
-        <p className="text-sm text-green-700 mt-1">
+      <Card className="p-6 text-center bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800">
+        <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
+        <p className="font-semibold text-green-800 dark:text-green-300">You&apos;re on the list!</p>
+        <p className="text-sm text-green-700 dark:text-green-400 mt-1">
           We&apos;ll notify you when our full-service import assistance launches.
         </p>
       </Card>

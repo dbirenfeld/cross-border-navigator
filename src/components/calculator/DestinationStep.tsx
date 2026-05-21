@@ -90,19 +90,19 @@ export function DestinationStep({
         </div>
 
         {destinationCountry === "IL" && (
-          <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={isOleh}
                 onChange={(e) => onToggleOleh(e.target.checked)}
-                className="mt-1 h-4 w-4 rounded border-gray-300"
+                className="mt-1 h-4 w-4 rounded border-gray-300 dark:border-gray-600"
               />
               <div>
-                <span className="text-sm font-medium text-blue-900">
+                <span className="text-sm font-medium text-blue-900 dark:text-blue-200">
                   I am an Oleh Chadash (new immigrant)
                 </span>
-                <p className="text-xs text-blue-700 mt-0.5">
+                <p className="text-xs text-blue-700 dark:text-blue-400 mt-0.5">
                   Olim receive a reduced purchase tax rate (50% instead of 83%) on their first vehicle import within 3 years of Aliyah.
                 </p>
               </div>

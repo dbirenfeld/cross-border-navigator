@@ -153,12 +153,12 @@ export function CostBreakdown({ result }: CostBreakdownProps) {
         </div>
       </Card>
 
-      <Card className="p-4 border-amber-200 bg-amber-50">
+      <Card className="p-4 border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30">
         <div className="flex gap-3">
-          <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+          <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm font-medium text-amber-800">Disclaimer</p>
-            <p className="text-xs text-amber-700 mt-1">{result.disclaimer}</p>
+            <p className="text-sm font-medium text-amber-800 dark:text-amber-300">Disclaimer</p>
+            <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">{result.disclaimer}</p>
           </div>
         </div>
       </Card>
