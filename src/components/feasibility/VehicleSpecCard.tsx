@@ -27,25 +27,33 @@ export function VehicleSpecCard({ vehicle }: VehicleSpecCardProps) {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        <SpecItem icon={<Car className="h-4 w-4" />} label="Body" value={vehicle.bodyClass} />
-        <SpecItem icon={<Cog className="h-4 w-4" />} label="Drive" value={vehicle.driveType} />
-        <SpecItem icon={<Fuel className="h-4 w-4" />} label="Fuel" value={vehicle.fuelType} />
-        <SpecItem
-          icon={<Gauge className="h-4 w-4" />}
-          label="Engine"
-          value={
-            vehicle.engineDisplacement
-              ? `${vehicle.engineDisplacement}L ${vehicle.engineCylinders ? vehicle.engineCylinders + "-cyl" : ""}`
-              : vehicle.engineCylinders ? `${vehicle.engineCylinders}-cyl` : "N/A"
-          }
-        />
-        <SpecItem icon={<MapPin className="h-4 w-4" />} label="Plant" value={vehicle.plantCountry || "N/A"} />
-        <SpecItem icon={<Calendar className="h-4 w-4" />} label="Year" value={vehicle.year?.toString() || "N/A"} />
+        {vehicle.bodyClass && <SpecItem icon={<Car className="h-4 w-4" />} label="Body" value={vehicle.bodyClass} />}
+        {vehicle.driveType && <SpecItem icon={<Cog className="h-4 w-4" />} label="Drive" value={vehicle.driveType} />}
+        {vehicle.fuelType && <SpecItem icon={<Fuel className="h-4 w-4" />} label="Fuel" value={vehicle.fuelType} />}
+        {(vehicle.engineDisplacement || vehicle.engineCylinders) && (
+          <SpecItem
+            icon={<Gauge className="h-4 w-4" />}
+            label="Engine"
+            value={
+              vehicle.engineDisplacement
+                ? `${vehicle.engineDisplacement}L ${vehicle.engineCylinders ? vehicle.engineCylinders + "-cyl" : ""}`
+                : `${vehicle.engineCylinders}-cyl`
+            }
+          />
+        )}
+        {vehicle.plantCountry && <SpecItem icon={<MapPin className="h-4 w-4" />} label="Origin" value={vehicle.plantCountry} />}
+        {vehicle.year && <SpecItem icon={<Calendar className="h-4 w-4" />} label="Year" value={vehicle.year.toString()} />}
       </div>
 
       {vehicle.horsepower && (
         <p className="text-sm text-muted-foreground mt-4">
           Power: {vehicle.horsepower} hp | Transmission: {vehicle.transmissionType || "N/A"}
+        </p>
+      )}
+
+      {vehicle.raw?.["Manufacturer"] && (
+        <p className="text-sm text-muted-foreground mt-2">
+          Manufacturer: {vehicle.raw["Manufacturer"]}
         </p>
       )}
     </Card>
