@@ -5,12 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { originCountries, destinationCountries } from "@/lib/data/countries";
+import { OriginCountry, DestinationCountry } from "@/types";
 import { Plus, X } from "lucide-react";
 
 interface AddShipmentModalProps {
   onAdd: (data: { description: string; origin: string; destination: string }) => void;
   onClose: () => void;
 }
+
+const originOptions = (Object.entries(originCountries) as [OriginCountry, { name: string }][]).map(
+  ([, { name }]) => name
+);
+
+const destinationOptions = (Object.entries(destinationCountries) as [DestinationCountry, { name: string }][]).map(
+  ([, { name }]) => name
+);
 
 export function AddShipmentModal({ onAdd, onClose }: AddShipmentModalProps) {
   const [description, setDescription] = useState("");
@@ -44,23 +61,37 @@ export function AddShipmentModal({ onAdd, onClose }: AddShipmentModalProps) {
           </div>
           <div className="space-y-2">
             <Label>Origin</Label>
-            <Input
-              value={origin}
-              onChange={(e) => setOrigin(e.target.value)}
-              placeholder="e.g. Los Angeles, CA, USA"
-              required
-            />
+            <Select
+              value={origin || undefined}
+              onValueChange={(v) => { if (v) setOrigin(v); }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select origin country" />
+              </SelectTrigger>
+              <SelectContent>
+                {originOptions.map((name) => (
+                  <SelectItem key={name} value={name}>{name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div className="space-y-2">
             <Label>Destination</Label>
-            <Input
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-              placeholder="e.g. Tel Aviv, Israel"
-              required
-            />
+            <Select
+              value={destination || undefined}
+              onValueChange={(v) => { if (v) setDestination(v); }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select destination country" />
+              </SelectTrigger>
+              <SelectContent>
+                {destinationOptions.map((name) => (
+                  <SelectItem key={name} value={name}>{name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" disabled={!description || !origin || !destination}>
             <Plus className="h-4 w-4 mr-2" />
             Add Shipment
           </Button>
