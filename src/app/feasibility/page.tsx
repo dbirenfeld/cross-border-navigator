@@ -40,8 +40,15 @@ export default function FeasibilityPage() {
       if (!response.ok) throw new Error("Failed to decode VIN");
       const data: VinDecodedResult = await response.json();
 
-      if (data.errorCode) {
-        setError(data.errorCode);
+      if (!data.make && data.errorCode) {
+        const errorCodes = data.errorCode.split(",").map((c: string) => c.trim());
+        if (errorCodes.includes("7")) {
+          setError(
+            "This vehicle's manufacturer is not registered with NHTSA. The VIN decoder currently only supports vehicles manufactured for the US/Canadian market. Non-US market vehicles (European, Japanese-domestic, etc.) cannot be decoded at this time."
+          );
+        } else {
+          setError("Unable to decode this VIN. Please verify the number is correct.");
+        }
         return;
       }
 

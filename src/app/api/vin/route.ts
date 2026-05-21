@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
       vehicleType: get("Vehicle Type"),
       gvwr: get("Gross Vehicle Weight Rating From"),
       doors: get("Doors"),
-      errorCode: get("Error Code") === "0" ? null : get("Error Text"),
+      errorCode: get("Error Code") === "0" || get("Error Code") === "1" ? null : get("Error Code"),
       raw: Object.fromEntries(
         results
           .filter((r) => r.Value && r.Value.trim())
