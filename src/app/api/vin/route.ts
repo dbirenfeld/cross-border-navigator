@@ -58,9 +58,9 @@ async function decodeWithAutodev(vin: string): Promise<VinDecodedResult | null> 
 
   try {
     const response = await fetch(
-      `https://auto.dev/api/vin/${vin}`,
+      `https://api.auto.dev/vin/${vin}`,
       {
-        headers: { Authorization: `Bearer ${apiKey}` },
+        headers: { "x-api-key": apiKey },
         next: { revalidate: 86400 },
       }
     );
@@ -73,24 +73,30 @@ async function decodeWithAutodev(vin: string): Promise<VinDecodedResult | null> 
 
     return {
       vin: vin.toUpperCase(),
-      year: data.years?.[0]?.year ? parseInt(data.years[0].year) : null,
-      make: data.make?.name ?? "",
-      model: data.model?.name ?? "",
-      trim: data.years?.[0]?.styles?.[0]?.trim ?? "",
-      bodyClass: data.years?.[0]?.styles?.[0]?.submodel?.body ?? "",
-      driveType: data.years?.[0]?.styles?.[0]?.drivenWheels ?? "",
-      fuelType: data.years?.[0]?.styles?.[0]?.engine?.fuelType ?? "",
-      engineCylinders: data.years?.[0]?.styles?.[0]?.engine?.cylinder?.toString() ?? "",
-      engineDisplacement: data.years?.[0]?.styles?.[0]?.engine?.size?.toString() ?? "",
-      horsepower: data.years?.[0]?.styles?.[0]?.engine?.horsepower?.toString() ?? "",
-      transmissionType: data.years?.[0]?.styles?.[0]?.transmission?.transmissionType ?? "",
-      plantCountry: "",
+      year: data.years?.[0] ?? (data.vehicle?.year || null),
+      make: data.make ?? data.vehicle?.make ?? "",
+      model: data.vehicle?.model ?? "",
+      trim: "",
+      bodyClass: data.type ?? "",
+      driveType: "",
+      fuelType: "",
+      engineCylinders: "",
+      engineDisplacement: "",
+      horsepower: "",
+      transmissionType: "",
+      plantCountry: data.origin ?? "",
       plantCity: "",
-      vehicleType: data.years?.[0]?.styles?.[0]?.submodel?.modelName ?? "",
+      vehicleType: data.type ?? "",
       gvwr: "",
-      doors: data.years?.[0]?.styles?.[0]?.numOfDoors?.toString() ?? "",
+      doors: "",
       errorCode: null,
-      raw: {},
+      raw: {
+        "Manufacturer": data.vehicle?.manufacturer ?? "",
+        "Origin": data.origin ?? "",
+        "WMI": data.wmi ?? "",
+        "Type": data.type ?? "",
+        "Decoded Source": "auto.dev Global VIN Database",
+      },
     };
   } catch {
     return null;
