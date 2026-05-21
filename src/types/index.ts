@@ -1,0 +1,90 @@
+export type ItemType = "vehicle" | "electronics" | "machinery" | "other";
+
+export type ShippingMethod = "roro" | "container";
+
+export type OriginCountry = "US" | "CA";
+
+export type DestinationCountry = "AE" | "SA" | "KW" | "QA" | "BH" | "OM";
+
+export interface Port {
+  code: string;
+  name: string;
+  city: string;
+  country: OriginCountry | DestinationCountry;
+  coast?: "east" | "west" | "gulf";
+}
+
+export interface VehicleMake {
+  id: string;
+  name: string;
+  models: VehicleModel[];
+}
+
+export interface VehicleModel {
+  id: string;
+  name: string;
+}
+
+export interface DutyRate {
+  country: DestinationCountry;
+  customsDutyPercent: number;
+  vatPercent: number;
+  notes: string;
+}
+
+export interface ShippingRoute {
+  originCoast: "east" | "west" | "gulf";
+  destinationPort: string;
+  roro: number;
+  container: number;
+  transitDays: { min: number; max: number };
+}
+
+export interface ModificationRequirement {
+  id: string;
+  name: string;
+  description: string;
+  estimatedCostMin: number;
+  estimatedCostMax: number;
+  applicableTo: ItemType[];
+  requiredIn: DestinationCountry[];
+}
+
+export interface CalculationInput {
+  itemType: ItemType;
+  itemValue: number;
+  vehicleYear?: number;
+  vehicleMake?: string;
+  vehicleModel?: string;
+  vehicleTrim?: string;
+  originCountry: OriginCountry;
+  originRegion: string;
+  destinationCountry: DestinationCountry;
+  destinationCity: string;
+  shippingMethod: ShippingMethod;
+}
+
+export interface CostLineItem {
+  label: string;
+  amount: number;
+  description?: string;
+  isSubItem?: boolean;
+}
+
+export interface CalculationResult {
+  input: CalculationInput;
+  breakdown: {
+    basePrice: number;
+    shipping: number;
+    insurance: number;
+    customsDuty: number;
+    vat: number;
+    portHandling: number;
+    modifications: CostLineItem[];
+    documentation: number;
+  };
+  totalLandedCost: number;
+  cifValue: number;
+  estimatedTransitDays: { min: number; max: number };
+  disclaimer: string;
+}

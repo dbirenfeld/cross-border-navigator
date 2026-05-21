@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CrossBorder Navigator - Import Cost Calculator
+
+A "TurboTax for International Importing" — calculate the true landed cost of importing vehicles and goods from North America to the Middle East.
+
+## Features
+
+- **Landed Cost Calculator**: Complete cost breakdown including base price, shipping, insurance, customs duties, VAT, port handling, required modifications, and documentation fees
+- **Multi-step wizard UI**: Intuitive form flow guiding users through item details, origin, and destination
+- **6 GCC destinations**: UAE, Saudi Arabia, Kuwait, Qatar, Bahrain, Oman
+- **2 origin countries**: United States (all 50 states) and Canada (all provinces)
+- **Shipping method comparison**: RoRo vs Container shipping with transit time estimates
+- **Modification awareness**: Automatically includes GCC-spec modification costs (radar, navigation, climate, etc.)
+
+## Tech Stack
+
+- **Next.js 16** (App Router) with TypeScript
+- **Tailwind CSS** + shadcn/ui components
+- **Zod** for API input validation
+- **React Hook Form** for form state management
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx            # Landing page
+│   ├── calculate/          # Calculator wizard
+│   ├── about/              # How it works page
+│   └── api/calculate/      # Cost calculation API endpoint
+├── components/
+│   ├── ui/                 # shadcn/ui components
+│   ├── calculator/         # Calculator step components
+│   ├── CostBreakdown.tsx   # Results display
+│   └── Header.tsx          # Navigation header
+├── lib/
+│   ├── calculator/         # Calculation engine
+│   │   ├── engine.ts       # Core orchestration
+│   │   ├── duties.ts       # Duty & tax calculations
+│   │   ├── shipping.ts     # Shipping cost estimation
+│   │   └── modifications.ts # GCC modification requirements
+│   ├── data/               # Reference data
+│   │   ├── countries.ts    # Countries, ports, regions
+│   │   ├── rates.ts        # Duty rates & shipping routes
+│   │   └── vehicles.ts     # Vehicle makes & models
+│   └── utils.ts            # Utilities (formatting, cn)
+└── types/
+    └── index.ts            # TypeScript interfaces
+```
 
-## Learn More
+## Supported Import Corridors
 
-To learn more about Next.js, take a look at the following resources:
+| Origin | Destination | Customs Duty | VAT |
+|--------|-------------|-------------|-----|
+| US/Canada | UAE | 5% CIF | 5% |
+| US/Canada | Saudi Arabia | 5% CIF | 15% |
+| US/Canada | Kuwait | 5% CIF | 0% |
+| US/Canada | Qatar | 5% CIF | 0% |
+| US/Canada | Bahrain | 5% CIF | 10% |
+| US/Canada | Oman | 5% CIF | 5% |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Disclaimer
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All estimates are for informational purposes only. Actual costs may vary based on current exchange rates, regulatory changes, and specific item characteristics. Consult a licensed customs broker for binding quotes.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Private - All rights reserved.

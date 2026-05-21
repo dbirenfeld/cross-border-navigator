@@ -1,65 +1,161 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Header } from "@/components/Header";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  Calculator,
+  Globe,
+  ShieldCheck,
+  Zap,
+  ArrowRight,
+  Ship,
+  FileText,
+  Wrench,
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background">
+        <div className="container mx-auto px-4 py-20 sm:py-32">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+              <Globe className="h-4 w-4" />
+              North America to Middle East
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+              Know Your True
+              <span className="text-primary block mt-2">Import Cost</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-muted-foreground mt-6 max-w-2xl mx-auto">
+              Stop guessing. Get an instant, detailed breakdown of every cost
+              involved in importing vehicles and goods from North America to the
+              Gulf region.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+              <Link href="/calculate">
+                <Button size="lg" className="text-base px-8 h-12">
+                  <Calculator className="h-5 w-5 mr-2" />
+                  Calculate Your Cost
+                </Button>
+              </Link>
+              <Link href="/about">
+                <Button variant="outline" size="lg" className="text-base px-8 h-12">
+                  How It Works
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold">Everything Calculated for You</h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
+              Our calculator factors in every cost component so there are no
+              surprises when your shipment arrives.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <FeatureCard
+              icon={<Ship className="h-6 w-6" />}
+              title="Shipping & Insurance"
+              description="Accurate estimates for RoRo and container shipping from major US and Canadian ports to Gulf destinations."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <FeatureCard
+              icon={<FileText className="h-6 w-6" />}
+              title="Duties & Taxes"
+              description="Precise customs duty and VAT calculations based on CIF values for all GCC countries."
+            />
+            <FeatureCard
+              icon={<Wrench className="h-6 w-6" />}
+              title="Modification Costs"
+              description="Required GCC-spec modifications like radar recalibration, navigation updates, and climate servicing."
+            />
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Trust Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold text-primary">6</div>
+                <p className="text-muted-foreground mt-1">GCC Countries Supported</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary">24+</div>
+                <p className="text-muted-foreground mt-1">Shipping Routes Mapped</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary">100%</div>
+                <p className="text-muted-foreground mt-1">Free to Use</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary/5">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold">Ready to Import?</h2>
+          <p className="text-muted-foreground mt-3 max-w-lg mx-auto">
+            Get your complete cost breakdown in under 2 minutes. No sign-up required.
+          </p>
+          <Link href="/calculate" className="inline-block mt-8">
+            <Button size="lg" className="text-base px-8 h-12">
+              <Calculator className="h-5 w-5 mr-2" />
+              Start Calculating
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t py-8 mt-auto">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <Ship className="h-5 w-5 text-muted-foreground" />
+              <span className="font-semibold">CrossBorder Navigator</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Estimates are for informational purposes only. Consult a licensed
+              broker for binding quotes.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
+  );
+}
+
+function FeatureCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) {
+  return (
+    <Card className="p-6 text-center">
+      <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary mb-4">
+        {icon}
+      </div>
+      <h3 className="font-semibold text-lg">{title}</h3>
+      <p className="text-sm text-muted-foreground mt-2">{description}</p>
+    </Card>
   );
 }
