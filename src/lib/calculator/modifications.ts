@@ -1,4 +1,4 @@
-import { ModificationRequirement, DestinationCountry, ItemType } from "@/types";
+import { ModificationRequirement, DestinationCountry, ItemType, VehicleFuelType } from "@/types";
 
 export const modificationRequirements: ModificationRequirement[] = [
   {
@@ -113,19 +113,29 @@ export const modificationRequirements: ModificationRequirement[] = [
 
 export function getRequiredModifications(
   itemType: ItemType,
-  destination: DestinationCountry
+  destination: DestinationCountry,
+  fuelType?: VehicleFuelType
 ): ModificationRequirement[] {
-  return modificationRequirements.filter(
-    (mod) =>
-      mod.applicableTo.includes(itemType) && mod.requiredIn.includes(destination)
-  );
+  return modificationRequirements.filter((mod) => {
+    if (!mod.applicableTo.includes(itemType)) return false;
+    if (!mod.requiredIn.includes(destination)) return false;
+
+    if (fuelType === "electric") {
+      if (mod.id === "il-green-tax" || mod.id === "il-emissions-conversion") {
+        return false;
+      }
+    }
+
+    return true;
+  });
 }
 
 export function estimateModificationCost(
   itemType: ItemType,
-  destination: DestinationCountry
+  destination: DestinationCountry,
+  fuelType?: VehicleFuelType
 ): { items: { name: string; cost: number }[]; total: number } {
-  const required = getRequiredModifications(itemType, destination);
+  const required = getRequiredModifications(itemType, destination, fuelType);
   const items = required.map((mod) => ({
     name: mod.name,
     cost: Math.round((mod.estimatedCostMin + mod.estimatedCostMax) / 2),

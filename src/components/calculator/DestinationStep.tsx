@@ -16,13 +16,17 @@ import { Badge } from "@/components/ui/badge";
 interface DestinationStepProps {
   destinationCountry: DestinationCountry | "";
   destinationCity: string;
+  isOleh: boolean;
   onChange: (field: string, value: string) => void;
+  onToggleOleh: (value: boolean) => void;
 }
 
 export function DestinationStep({
   destinationCountry,
   destinationCity,
+  isOleh,
   onChange,
+  onToggleOleh,
 }: DestinationStepProps) {
   const cities = destinationCountry
     ? destinationCountries[destinationCountry].cities
@@ -84,6 +88,27 @@ export function DestinationStep({
             </SelectContent>
           </Select>
         </div>
+
+        {destinationCountry === "IL" && (
+          <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={isOleh}
+                onChange={(e) => onToggleOleh(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-gray-300"
+              />
+              <div>
+                <span className="text-sm font-medium text-blue-900">
+                  I am an Oleh Chadash (new immigrant)
+                </span>
+                <p className="text-xs text-blue-700 mt-0.5">
+                  Olim receive a reduced purchase tax rate (50% instead of 83%) on their first vehicle import within 3 years of Aliyah.
+                </p>
+              </div>
+            </label>
+          </div>
+        )}
 
         {dutyInfo && (
           <div className="mt-6 p-4 bg-muted/50 rounded-lg space-y-2">

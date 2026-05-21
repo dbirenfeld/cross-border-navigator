@@ -19,6 +19,7 @@ interface VehicleDetailsStepProps {
   vehicleMake: string;
   vehicleModel: string;
   vehicleTrim: string;
+  vehicleFuelType: string;
   onChange: (field: string, value: string) => void;
 }
 
@@ -29,6 +30,7 @@ export function VehicleDetailsStep({
   vehicleMake,
   vehicleModel,
   vehicleTrim,
+  vehicleFuelType,
   onChange,
 }: VehicleDetailsStepProps) {
   const selectedMake = vehicleMakes.find((m) => m.id === vehicleMake);
@@ -135,6 +137,25 @@ export function VehicleDetailsStep({
                 value={vehicleTrim}
                 onChange={(e) => onChange("vehicleTrim", e.target.value)}
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="vehicleFuelType">Fuel / Powertrain Type</Label>
+              <Select
+                value={vehicleFuelType || undefined}
+                onValueChange={(v) => { if (v) onChange("vehicleFuelType", v); }}
+              >
+                <SelectTrigger id="vehicleFuelType">
+                  <SelectValue placeholder="Select fuel type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gasoline">Gasoline</SelectItem>
+                  <SelectItem value="diesel">Diesel</SelectItem>
+                  <SelectItem value="hybrid">Hybrid</SelectItem>
+                  <SelectItem value="plugin_hybrid">Plug-in Hybrid</SelectItem>
+                  <SelectItem value="electric">Electric</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </>
         )}

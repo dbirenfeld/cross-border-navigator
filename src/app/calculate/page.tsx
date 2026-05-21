@@ -29,6 +29,8 @@ interface FormData {
   vehicleMake: string;
   vehicleModel: string;
   vehicleTrim: string;
+  vehicleFuelType: string;
+  isOleh: boolean;
   originCountry: OriginCountry | "";
   originRegion: string;
   shippingMethod: ShippingMethod;
@@ -43,6 +45,8 @@ const initialFormData: FormData = {
   vehicleMake: "",
   vehicleModel: "",
   vehicleTrim: "",
+  vehicleFuelType: "gasoline",
+  isOleh: false,
   originCountry: "",
   originRegion: "",
   shippingMethod: "roro",
@@ -67,7 +71,7 @@ export default function CalculatePage() {
       case 1:
         if (!formData.itemValue || Number(formData.itemValue) < 100) return false;
         if (formData.itemType === "vehicle") {
-          return !!(formData.vehicleYear && formData.vehicleMake && formData.vehicleModel);
+          return !!(formData.vehicleYear && formData.vehicleMake && formData.vehicleModel && formData.vehicleFuelType);
         }
         return true;
       case 2:
@@ -113,6 +117,8 @@ export default function CalculatePage() {
           vehicleMake: formData.vehicleMake || undefined,
           vehicleModel: formData.vehicleModel || undefined,
           vehicleTrim: formData.vehicleTrim || undefined,
+          vehicleFuelType: formData.vehicleFuelType || undefined,
+          isOleh: formData.isOleh || undefined,
           originCountry: formData.originCountry,
           originRegion: formData.originRegion,
           destinationCountry: formData.destinationCountry,
@@ -159,6 +165,7 @@ export default function CalculatePage() {
               vehicleMake={formData.vehicleMake}
               vehicleModel={formData.vehicleModel}
               vehicleTrim={formData.vehicleTrim}
+              vehicleFuelType={formData.vehicleFuelType}
               onChange={updateField}
             />
           )}
@@ -176,7 +183,9 @@ export default function CalculatePage() {
             <DestinationStep
               destinationCountry={formData.destinationCountry}
               destinationCity={formData.destinationCity}
+              isOleh={formData.isOleh}
               onChange={updateField}
+              onToggleOleh={(value) => setFormData((prev) => ({ ...prev, isOleh: value }))}
             />
           )}
 

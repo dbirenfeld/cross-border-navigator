@@ -1,5 +1,7 @@
 export type ItemType = "vehicle" | "electronics" | "machinery" | "other";
 
+export type VehicleFuelType = "gasoline" | "diesel" | "hybrid" | "plugin_hybrid" | "electric";
+
 export type ShippingMethod = "roro" | "container";
 
 export type OriginCountry = "US" | "CA";
@@ -58,6 +60,8 @@ export interface CalculationInput {
   vehicleMake?: string;
   vehicleModel?: string;
   vehicleTrim?: string;
+  vehicleFuelType?: VehicleFuelType;
+  isOleh?: boolean;
   originCountry: OriginCountry;
   originRegion: string;
   destinationCountry: DestinationCountry;

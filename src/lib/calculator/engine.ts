@@ -18,13 +18,17 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
 
   const customsDuty = calculateCustomsDuty(cif, input.destinationCountry);
 
-  const purchaseTax = calculatePurchaseTax(cif, customsDuty, input.destinationCountry);
+  const purchaseTax = calculatePurchaseTax(
+    cif, customsDuty, input.destinationCountry,
+    input.vehicleFuelType, input.isOleh
+  );
 
   const vat = calculateVAT(cif, customsDuty, purchaseTax, input.destinationCountry);
 
   const modifications = estimateModificationCost(
     input.itemType,
-    input.destinationCountry
+    input.destinationCountry,
+    input.vehicleFuelType
   );
 
   const modificationLineItems: CostLineItem[] = modifications.items.map((item) => ({

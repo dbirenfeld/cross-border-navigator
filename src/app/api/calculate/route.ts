@@ -10,6 +10,8 @@ const calculationSchema = z.object({
   vehicleMake: z.string().optional(),
   vehicleModel: z.string().optional(),
   vehicleTrim: z.string().optional(),
+  vehicleFuelType: z.enum(["gasoline", "diesel", "hybrid", "plugin_hybrid", "electric"]).optional(),
+  isOleh: z.boolean().optional(),
   originCountry: z.enum(["US", "CA"]),
   originRegion: z.string().min(1),
   destinationCountry: z.enum(["AE", "SA", "KW", "QA", "BH", "OM", "IL"]),
