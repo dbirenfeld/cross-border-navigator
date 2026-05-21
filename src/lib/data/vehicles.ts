@@ -664,5 +664,11 @@ export const vehicleMakes: VehicleMake[] = [
   },
 ];
 
+// Sort makes alphabetically by name, and models within each make
+vehicleMakes.sort((a, b) => a.name.localeCompare(b.name));
+vehicleMakes.forEach((make) => {
+  make.models.sort((a, b) => a.name.localeCompare(b.name));
+});
+
 export const currentYear = new Date().getFullYear();
 export const vehicleYears = Array.from({ length: 15 }, (_, i) => currentYear + 1 - i);

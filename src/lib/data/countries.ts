@@ -20,21 +20,21 @@ export const originCountries: Record<OriginCountry, { name: string; regions: str
     name: "Canada",
     regions: [
       "Alberta", "British Columbia", "Manitoba", "New Brunswick",
-      "Newfoundland and Labrador", "Nova Scotia", "Ontario",
-      "Prince Edward Island", "Quebec", "Saskatchewan",
-      "Northwest Territories", "Nunavut", "Yukon",
+      "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia",
+      "Nunavut", "Ontario", "Prince Edward Island", "Quebec",
+      "Saskatchewan", "Yukon",
     ],
   },
 };
 
 export const destinationCountries: Record<DestinationCountry, { name: string; cities: string[] }> = {
-  AE: { name: "United Arab Emirates", cities: ["Dubai", "Abu Dhabi", "Sharjah", "Ajman"] },
-  SA: { name: "Saudi Arabia", cities: ["Riyadh", "Jeddah", "Dammam", "Khobar"] },
-  KW: { name: "Kuwait", cities: ["Kuwait City", "Salmiya", "Hawalli"] },
-  QA: { name: "Qatar", cities: ["Doha", "Al Wakrah", "Al Khor"] },
   BH: { name: "Bahrain", cities: ["Manama", "Muharraq", "Riffa"] },
+  IL: { name: "Israel", cities: ["Ashdod", "Beer Sheva", "Haifa", "Jerusalem", "Netanya", "Tel Aviv"] },
+  KW: { name: "Kuwait", cities: ["Hawalli", "Kuwait City", "Salmiya"] },
   OM: { name: "Oman", cities: ["Muscat", "Salalah", "Sohar"] },
-  IL: { name: "Israel", cities: ["Tel Aviv", "Jerusalem", "Haifa", "Beer Sheva", "Ashdod", "Netanya"] },
+  QA: { name: "Qatar", cities: ["Al Khor", "Al Wakrah", "Doha"] },
+  SA: { name: "Saudi Arabia", cities: ["Dammam", "Jeddah", "Khobar", "Riyadh"] },
+  AE: { name: "United Arab Emirates", cities: ["Abu Dhabi", "Ajman", "Dubai", "Sharjah"] },
 };
 
 export const originPorts: Port[] = [
