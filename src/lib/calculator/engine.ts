@@ -1,5 +1,5 @@
 import { CalculationInput, CalculationResult, CostLineItem } from "@/types";
-import { calculateCIF, calculateCustomsDuty, calculateVAT } from "./duties";
+import { calculateCIF, calculateCustomsDuty, calculatePurchaseTax, calculateVAT } from "./duties";
 import { estimateShipping } from "./shipping";
 import { estimateModificationCost } from "./modifications";
 import { getCoastForRegion } from "@/lib/data/countries";
@@ -18,7 +18,9 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
 
   const customsDuty = calculateCustomsDuty(cif, input.destinationCountry);
 
-  const vat = calculateVAT(cif, customsDuty, input.destinationCountry);
+  const purchaseTax = calculatePurchaseTax(cif, customsDuty, input.destinationCountry);
+
+  const vat = calculateVAT(cif, customsDuty, purchaseTax, input.destinationCountry);
 
   const modifications = estimateModificationCost(
     input.itemType,
@@ -36,6 +38,7 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
     shipping.cost +
     insurance +
     customsDuty +
+    purchaseTax +
     vat +
     PORT_HANDLING_FEE +
     modifications.total +
@@ -48,6 +51,7 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
       shipping: shipping.cost,
       insurance,
       customsDuty,
+      purchaseTax,
       vat,
       portHandling: PORT_HANDLING_FEE,
       modifications: modificationLineItems,

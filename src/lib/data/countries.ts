@@ -34,6 +34,7 @@ export const destinationCountries: Record<DestinationCountry, { name: string; ci
   QA: { name: "Qatar", cities: ["Doha", "Al Wakrah", "Al Khor"] },
   BH: { name: "Bahrain", cities: ["Manama", "Muharraq", "Riffa"] },
   OM: { name: "Oman", cities: ["Muscat", "Salalah", "Sohar"] },
+  IL: { name: "Israel", cities: ["Tel Aviv", "Jerusalem", "Haifa", "Beer Sheva", "Ashdod", "Netanya"] },
 };
 
 export const originPorts: Port[] = [
@@ -56,6 +57,8 @@ export const destinationPorts: Port[] = [
   { code: "QADOH", name: "Hamad Port", city: "Doha", country: "QA" },
   { code: "BHKBS", name: "Khalifa Bin Salman Port", city: "Manama", country: "BH" },
   { code: "OMSOH", name: "Port of Sohar", city: "Sohar", country: "OM" },
+  { code: "ILASH", name: "Port of Ashdod", city: "Ashdod", country: "IL" },
+  { code: "ILHFA", name: "Port of Haifa", city: "Haifa", country: "IL" },
 ];
 
 export function getCoastForRegion(country: OriginCountry, region: string): "east" | "west" | "gulf" {

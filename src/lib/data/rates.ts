@@ -37,6 +37,13 @@ export const dutyRates: Record<DestinationCountry, DutyRate> = {
     vatPercent: 5,
     notes: "Royal Oman Police clearance required for vehicle registration.",
   },
+  IL: {
+    country: "IL",
+    customsDutyPercent: 7,
+    purchaseTaxPercent: 83,
+    vatPercent: 18,
+    notes: "Purchase tax (83%) applied on CIF + duty. VAT (18%) applied on CIF + duty + purchase tax. Olim (new immigrants) receive reduced rates. Green tax adjustments may apply based on pollution level.",
+  },
 };
 
 export const shippingRoutes: ShippingRoute[] = [
@@ -69,6 +76,18 @@ export const shippingRoutes: ShippingRoute[] = [
   { originCoast: "gulf", destinationPort: "QADOH", roro: 2800, container: 4100, transitDays: { min: 28, max: 40 } },
   { originCoast: "gulf", destinationPort: "BHKBS", roro: 2850, container: 4150, transitDays: { min: 29, max: 41 } },
   { originCoast: "gulf", destinationPort: "OMSOH", roro: 2750, container: 4050, transitDays: { min: 27, max: 37 } },
+
+  // East Coast to Israel (Mediterranean - shorter than Gulf)
+  { originCoast: "east", destinationPort: "ILASH", roro: 2400, container: 3800, transitDays: { min: 18, max: 25 } },
+  { originCoast: "east", destinationPort: "ILHFA", roro: 2450, container: 3850, transitDays: { min: 18, max: 25 } },
+
+  // West Coast to Israel (via Panama Canal or Pacific/Suez)
+  { originCoast: "west", destinationPort: "ILASH", roro: 3600, container: 5200, transitDays: { min: 35, max: 50 } },
+  { originCoast: "west", destinationPort: "ILHFA", roro: 3650, container: 5250, transitDays: { min: 35, max: 50 } },
+
+  // Gulf Coast to Israel
+  { originCoast: "gulf", destinationPort: "ILASH", roro: 2600, container: 4000, transitDays: { min: 22, max: 30 } },
+  { originCoast: "gulf", destinationPort: "ILHFA", roro: 2650, container: 4050, transitDays: { min: 22, max: 30 } },
 ];
 
 export const INSURANCE_RATE = 0.015; // 1.5% of CIF

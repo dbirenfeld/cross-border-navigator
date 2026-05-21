@@ -221,9 +221,15 @@ export function PdfReport({ result }: PdfReportProps) {
             <Text style={styles.rowValue}>{formatCurrency(cifValue)}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.rowLabel}>Customs Duty (5% CIF)</Text>
+            <Text style={styles.rowLabel}>Customs Duty</Text>
             <Text style={styles.rowValue}>{formatCurrency(breakdown.customsDuty)}</Text>
           </View>
+          {breakdown.purchaseTax > 0 && (
+            <View style={styles.row}>
+              <Text style={styles.rowLabel}>Purchase Tax</Text>
+              <Text style={styles.rowValue}>{formatCurrency(breakdown.purchaseTax)}</Text>
+            </View>
+          )}
           <View style={styles.row}>
             <Text style={styles.rowLabel}>VAT</Text>
             <Text style={styles.rowValue}>{formatCurrency(breakdown.vat)}</Text>

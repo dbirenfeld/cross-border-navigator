@@ -64,6 +64,42 @@ export const modificationRequirements: ModificationRequirement[] = [
     applicableTo: ["vehicle"],
     requiredIn: ["AE", "KW", "QA", "BH", "OM"],
   },
+  {
+    id: "il-mot-test",
+    name: "Israeli MOT Test (Tesht Rishoni)",
+    description: "Mandatory first vehicle inspection at licensed testing center for import approval",
+    estimatedCostMin: 300,
+    estimatedCostMax: 600,
+    applicableTo: ["vehicle"],
+    requiredIn: ["IL"],
+  },
+  {
+    id: "il-emissions-conversion",
+    name: "Emissions Standard Compliance",
+    description: "Verify or adjust vehicle to meet Israeli Euro emission standards",
+    estimatedCostMin: 200,
+    estimatedCostMax: 500,
+    applicableTo: ["vehicle"],
+    requiredIn: ["IL"],
+  },
+  {
+    id: "il-headlight-conversion",
+    name: "Headlight Beam Adjustment",
+    description: "Adjust headlights for right-hand traffic pattern (Israel drives on the right)",
+    estimatedCostMin: 100,
+    estimatedCostMax: 250,
+    applicableTo: ["vehicle"],
+    requiredIn: ["IL"],
+  },
+  {
+    id: "il-km-speedometer",
+    name: "Speedometer Conversion",
+    description: "Ensure primary display is in km/h as required by Israeli law",
+    estimatedCostMin: 50,
+    estimatedCostMax: 150,
+    applicableTo: ["vehicle"],
+    requiredIn: ["IL"],
+  },
 ];
 
 export function getRequiredModifications(

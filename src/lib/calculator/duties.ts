@@ -18,14 +18,26 @@ export function calculateCustomsDuty(
   return Math.round(cifValue * (rate.customsDutyPercent / 100));
 }
 
-export function calculateVAT(
+export function calculatePurchaseTax(
   cifValue: number,
   customsDuty: number,
   destination: DestinationCountry
 ): number {
   const rate = dutyRates[destination];
-  // VAT is typically calculated on CIF + Duty
-  return Math.round((cifValue + customsDuty) * (rate.vatPercent / 100));
+  if (!rate.purchaseTaxPercent) return 0;
+  // Purchase tax is applied on CIF + customs duty
+  return Math.round((cifValue + customsDuty) * (rate.purchaseTaxPercent / 100));
+}
+
+export function calculateVAT(
+  cifValue: number,
+  customsDuty: number,
+  purchaseTax: number,
+  destination: DestinationCountry
+): number {
+  const rate = dutyRates[destination];
+  // VAT is calculated on CIF + Duty + Purchase Tax (for countries like Israel)
+  return Math.round((cifValue + customsDuty + purchaseTax) * (rate.vatPercent / 100));
 }
 
 export function getDutyInfo(destination: DestinationCountry) {

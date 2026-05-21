@@ -75,6 +75,17 @@ export const declarationTemplates: FormTemplate[] = [
       "countryOfOrigin", "shippingMethod", "portOfDestination",
     ],
   },
+  {
+    id: "il-customs-declaration",
+    name: "Israel Customs Declaration Form",
+    country: "IL",
+    description: "Israel Tax Authority (Rashut HaMisim) customs import declaration. Requires Teudat Zehut or passport, and vehicle must pass MOT inspection.",
+    requiredFields: [
+      "importerName", "importerAddress", "importerPhone", "importerId",
+      "itemDescription", "hsCode", "quantity", "totalValue", "currency",
+      "countryOfOrigin", "shippingMethod", "portOfDestination", "manufacturer",
+    ],
+  },
 ];
 
 export function getTemplateForCountry(country: DestinationCountry): FormTemplate {

@@ -88,13 +88,21 @@ export function CostBreakdown({ result }: CostBreakdownProps) {
 
           <CostRow
             icon={<Landmark className="h-4 w-4" />}
-            label={`Customs Duty (5% CIF)`}
+            label="Customs Duty"
             amount={breakdown.customsDuty}
           />
 
+          {breakdown.purchaseTax > 0 && (
+            <CostRow
+              icon={<Landmark className="h-4 w-4" />}
+              label="Purchase Tax"
+              amount={breakdown.purchaseTax}
+            />
+          )}
+
           <CostRow
             icon={<Receipt className="h-4 w-4" />}
-            label={`VAT`}
+            label="VAT"
             amount={breakdown.vat}
           />
 

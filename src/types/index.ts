@@ -4,7 +4,7 @@ export type ShippingMethod = "roro" | "container";
 
 export type OriginCountry = "US" | "CA";
 
-export type DestinationCountry = "AE" | "SA" | "KW" | "QA" | "BH" | "OM";
+export type DestinationCountry = "AE" | "SA" | "KW" | "QA" | "BH" | "OM" | "IL";
 
 export interface Port {
   code: string;
@@ -28,6 +28,7 @@ export interface VehicleModel {
 export interface DutyRate {
   country: DestinationCountry;
   customsDutyPercent: number;
+  purchaseTaxPercent?: number;
   vatPercent: number;
   notes: string;
 }
@@ -78,6 +79,7 @@ export interface CalculationResult {
     shipping: number;
     insurance: number;
     customsDuty: number;
+    purchaseTax: number;
     vat: number;
     portHandling: number;
     modifications: CostLineItem[];

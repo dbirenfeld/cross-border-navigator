@@ -12,7 +12,7 @@ const calculationSchema = z.object({
   vehicleTrim: z.string().optional(),
   originCountry: z.enum(["US", "CA"]),
   originRegion: z.string().min(1),
-  destinationCountry: z.enum(["AE", "SA", "KW", "QA", "BH", "OM"]),
+  destinationCountry: z.enum(["AE", "SA", "KW", "QA", "BH", "OM", "IL"]),
   destinationCity: z.string().min(1),
   shippingMethod: z.enum(["roro", "container"]),
 });

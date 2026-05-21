@@ -92,6 +92,11 @@ export function DestinationStep({
               <Badge variant="secondary">
                 Customs: {dutyInfo.customsDutyPercent}% CIF
               </Badge>
+              {dutyInfo.purchaseTaxPercent && (
+                <Badge variant="secondary">
+                  Purchase Tax: {dutyInfo.purchaseTaxPercent}%
+                </Badge>
+              )}
               <Badge variant="secondary">
                 VAT: {dutyInfo.vatPercent}%
               </Badge>
