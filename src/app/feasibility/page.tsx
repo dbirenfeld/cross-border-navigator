@@ -40,15 +40,15 @@ export default function FeasibilityPage() {
       if (!response.ok) throw new Error("Failed to decode VIN");
       const data: VinDecodedResult = await response.json();
 
+      if (!data.make && data.errorCode === "local_only") {
+        setError(
+          `Limited data available. This VIN is from ${data.plantCountry || "an unrecognized manufacturer"}${data.year ? ` (${data.year})` : ""}. For full decoding of non-US/Canadian vehicles, add an AUTODEV_API_KEY in your environment variables (free tier: 1,000 lookups/month at auto.dev).`
+        );
+        return;
+      }
+
       if (!data.make && data.errorCode) {
-        const errorCodes = data.errorCode.split(",").map((c: string) => c.trim());
-        if (errorCodes.includes("7")) {
-          setError(
-            "This vehicle's manufacturer is not registered with NHTSA. The VIN decoder currently only supports vehicles manufactured for the US/Canadian market. Non-US market vehicles (European, Japanese-domestic, etc.) cannot be decoded at this time."
-          );
-        } else {
-          setError("Unable to decode this VIN. Please verify the number is correct.");
-        }
+        setError("Unable to decode this VIN. Please verify the number is correct.");
         return;
       }
 
