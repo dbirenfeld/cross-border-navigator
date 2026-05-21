@@ -48,7 +48,7 @@ export function parseVinLocally(vin: string): { year: number | null; country: st
 }
 
 export function isValidVin(vin: string): boolean {
-  return /^[A-HJ-NPR-Z0-9]{17}$/i.test(vin);
+  return /^[A-Z0-9]{17}$/i.test(vin);
 }
 
 export async function decodeVin(vin: string): Promise<VinDecodedResult> {
