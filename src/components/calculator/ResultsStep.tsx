@@ -2,6 +2,7 @@
 
 import { CalculationResult } from "@/types";
 import { CostBreakdown } from "@/components/CostBreakdown";
+import { HomologationWarnings } from "@/components/calculator/HomologationWarnings";
 import { LeadCapture } from "@/components/calculator/LeadCapture";
 import { DownloadPdfButton } from "@/components/calculator/DownloadPdfButton";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,10 @@ export function ResultsStep({ result, isLoading, onReset }: ResultsStepProps) {
   return (
     <div className="space-y-6">
       <CostBreakdown result={result} />
+
+      {result.homologationWarnings && result.homologationWarnings.length > 0 && (
+        <HomologationWarnings warnings={result.homologationWarnings} />
+      )}
 
       <div className="flex flex-col sm:flex-row justify-center gap-3">
         <DownloadPdfButton result={result} />

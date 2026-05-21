@@ -2,6 +2,7 @@ import { CalculationInput, CalculationResult, CostLineItem } from "@/types";
 import { calculateCIF, calculateCustomsDuty, calculatePurchaseTax, calculateVAT } from "./duties";
 import { estimateShipping } from "./shipping";
 import { estimateModificationCost } from "./modifications";
+import { runHomologationCheck } from "./homologation";
 import { getCoastForRegion } from "@/lib/data/countries";
 import { PORT_HANDLING_FEE, DOCUMENTATION_FEE, HIDDEN_FEES } from "@/lib/data/rates";
 
@@ -76,6 +77,7 @@ export function calculateLandedCost(input: CalculationInput): CalculationResult 
     totalLandedCost,
     cifValue: cif,
     estimatedTransitDays: shipping.transitDays,
+    homologationWarnings: runHomologationCheck(input),
     disclaimer:
       "This estimate is for informational purposes only. Actual costs may vary based on current exchange rates, regulatory changes, and specific item characteristics. Consult a licensed customs broker for binding quotes.",
   };

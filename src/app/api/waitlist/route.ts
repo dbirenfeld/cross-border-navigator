@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { appendFileSync, existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import { kvAppendToList, isKvAvailable } from "@/lib/storage/redis";
 
 const schema = z.object({
   email: z.string().email(),
@@ -19,13 +18,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const dataDir = join(process.cwd(), "data");
-    if (!existsSync(dataDir)) {
-      mkdirSync(dataDir, { recursive: true });
-    }
+    const entry = {
+      email: parsed.data.email,
+      timestamp: new Date().toISOString(),
+      ip: request.headers.get("x-forwarded-for") ?? "unknown",
+    };
 
-    const entry = `${parsed.data.email},${new Date().toISOString()}\n`;
-    appendFileSync(join(dataDir, "waitlist.csv"), entry);
+    if (isKvAvailable()) {
+      await kvAppendToList("waitlist", entry);
+    } else {
+      // Local dev fallback: log to console
+      console.log("[waitlist]", entry);
+    }
 
     return NextResponse.json({ success: true });
   } catch {

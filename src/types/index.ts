@@ -100,5 +100,14 @@ export interface CalculationResult {
   totalLandedCost: number;
   cifValue: number;
   estimatedTransitDays: { min: number; max: number };
+  homologationWarnings: {
+    id: string;
+    severity: "critical" | "warning" | "info";
+    category: string;
+    title: string;
+    description: string;
+    action: string;
+    estimatedCost?: { min: number; max: number };
+  }[];
   disclaimer: string;
 }
