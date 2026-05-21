@@ -42,7 +42,7 @@ export const dutyRates: Record<DestinationCountry, DutyRate> = {
     customsDutyPercent: 7,
     purchaseTaxPercent: 83,
     vatPercent: 18,
-    notes: "Purchase tax (83%) applied on CIF + duty. VAT (18%) applied on CIF + duty + purchase tax. Olim (new immigrants) receive reduced rates. Green tax adjustments may apply based on pollution level.",
+    notes: "Purchase tax (83%) applied on CIF + duty for gasoline/diesel vehicles. Electric vehicles: 52% purchase tax. VAT (18%, raised from 17% in Jan 2025) applied on CIF + duty + purchase tax. Olim receive reduced purchase tax (50% instead of 83%). Additional Green Tax levy applies based on pollution grade.",
   },
 };
 

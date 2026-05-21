@@ -65,6 +65,15 @@ export const modificationRequirements: ModificationRequirement[] = [
     requiredIn: ["AE", "KW", "QA", "BH", "OM"],
   },
   {
+    id: "il-green-tax",
+    name: "Green Tax (Ekoloqit)",
+    description: "Environmental levy based on vehicle pollution grade (1-15). Varies by engine type and emissions. Electric vehicles are exempt.",
+    estimatedCostMin: 1400,
+    estimatedCostMax: 7000,
+    applicableTo: ["vehicle"],
+    requiredIn: ["IL"],
+  },
+  {
     id: "il-mot-test",
     name: "Israeli MOT Test (Tesht Rishoni)",
     description: "Mandatory first vehicle inspection at licensed testing center for import approval",
